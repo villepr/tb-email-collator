@@ -1,0 +1,262 @@
+:root {
+    --primary-color: #0a84ff;
+    --background-color: #f0f0f7;
+    --container-bg: #ffffff;
+    --text-color: #333;
+    --label-color: #555;
+    --border-color: #d1d1d6;
+    --button-text-color: #fff;
+    --error-color: #d93025;
+    --progress-bg: #e9e9ed;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 1rem;
+    min-width: 550px;
+}
+
+.container {
+    background-color: var(--container-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f9f9fb;
+}
+
+h1 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-link {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--label-color);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px; /* Overlap the container border */
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    font-weight: 600;
+}
+
+main, aside {
+    padding: 1.5rem;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--label-color);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+.btn-primary:hover {
+    background-color: #007aff;
+}
+.btn-primary:disabled {
+    background-color: #a0a0a5;
+    cursor: not-allowed;
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: var(--button-text-color);
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #666;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Progress Bar */
+#progress-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: var(--progress-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+#progress-bar-inner {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease-in-out;
+}
+#progress-text {
+    margin: 0;
+    font-weight: 500;
+}
+#error-log {
+    background-color: #fff0f0;
+    color: var(--error-color);
+    padding: 1rem;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-top: 1rem;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Settings Specific */
+.provider-settings {
+    padding-left: 1rem;
+    border-left: 3px solid var(--border-color);
+    margin-top: 1rem;
+}
+#settings-saved-msg {
+    color: #28a745;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+input[type="range"] {
+    flex-grow: 1;
+}
+
+/* Tom Select Styling */
+.ts-control {
+    padding: 0.65rem 0.75rem !important; /* Override default padding */
+    border-radius: 6px !important;
+}
+.ts-control, .ts-dropdown {
+    border-color: var(--border-color) !important;
+}
+.ts-control.focus {
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2) !important;
+    border-color: var(--primary-color) !important;
+}
+.ts-dropdown .active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+.item {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-radius: 4px;
+}
+.ts-control > .item {
+    padding: 4px 8px !important;
+}
+
+/* Loader */
+.loader-container {
+    position: relative;
+    width: 100%;
+}
+
+.loader {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: translateY(-50%) rotate(0deg); }
+  100% { -webkit-transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+.loader-container .loader.active {
+    display: block;
+}

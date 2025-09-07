@@ -1,0 +1,15 @@
+{
+    "extensionName": {
+        "message": "Email Collation Tool",
+        "description": "Name of the extension."
+    },
+    "extensionDescription": {
+        "message": "Collate and deduplicate emails from selected senders using AI.",
+        "description": "Description of the extension."
+    },
+    "collateButton": {
+        "message": "Start Collation",
+        "description": "Label for the main action button."
+    }
+}
+

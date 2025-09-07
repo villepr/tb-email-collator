@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Collation Tool</title>
+    <link rel="stylesheet" href="collate.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Email Collation Tool</h1>
+            <div class="tabs">
+                <button class="tab-link active" data-tab="main">Collate</button>
+                <button class="tab-link" data-tab="settings">Settings</button>
+            </div>
+        </header>
+
+        <main id="main" class="tab-content active">
+            <div class="form-group">
+                <label for="sender-select">Select Senders (or type to search)</label>
+                <div class="loader-container">
+                    <select id="sender-select" multiple></select>
+                     <div id="sender-loader" class="loader"></div>
+                </div>
+                <small>Loading all senders can take some time. Please be patient.</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="start-date">Start Date (Optional)</label>
+                <input type="date" id="start-date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Output Method</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="output-method" value="tab" checked> Open in New Tab</label>
+                    <label><input type="radio" name="output-method" value="file"> Save as File</label>
+                </div>
+            </div>
+
+            <button id="start-collation-btn" class="btn btn-primary">Start Collation</button>
+
+            <div id="progress-container" class="hidden">
+                <h2>Progress</h2>
+                <div class="progress-bar">
+                    <div id="progress-bar-inner"></div>
+                </div>
+                <p id="progress-text">Starting...</p>
+                <pre id="error-log" class="hidden"></pre>
+            </div>
+        </main>
+
+        <aside id="settings" class="tab-content">
+            <h2>Embedding Provider Settings</h2>
+            <div class="form-group">
+                <label for="provider-select">Provider</label>
+                <select id="provider-select" class="form-control">
+                    <option value="ollama">Ollama (Local)</option>
+                    <option value="gemini">Google Gemini</option>
+                </select>
+            </div>
+
+            <div id="ollama-settings" class="provider-settings">
+                <h3>Ollama Settings</h3>
+                <div class="form-group">
+                    <label for="ollama-endpoint">API Endpoint</label>
+                    <input type="text" id="ollama-endpoint" class="form-control" placeholder="http://localhost:11434">
+                </div>
+                <div class="form-group">
+                    <label for="ollama-model">Embedding Model</label>
+                    <input type="text" id="ollama-model" class="form-control" placeholder="nomic-embed-text">
+                </div>
+            </div>
+
+            <div id="gemini-settings" class="provider-settings hidden">
+                <h3>Gemini Settings</h3>
+                 <div class="form-group">
+                    <label for="gemini-api-key">API Key</label>
+                    <input type="password" id="gemini-api-key" class="form-control" placeholder="Enter your Gemini API Key">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="similarity-threshold">Deduplication Sensitivity</label>
+                <div class="slider-container">
+                    <span>Less Strict</span>
+                    <input type="range" id="similarity-threshold" min="0.7" max="1.0" step="0.01" value="0.95">
+                    <span>More Strict</span>
+                </div>
+                 <small>A higher value means messages must be more similar to be considered duplicates. Default: 0.95</small>
+            </div>
+
+
+            <button id="save-settings-btn" class="btn btn-secondary">Save Settings</button>
+            <p id="settings-saved-msg" class="hidden">Settings saved!</p>
+        </aside>
+
+    </div>
+    <!-- Using TomSelect for a better multi-select experience -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script src="collate.js"></script>
+</body>
+</html>
