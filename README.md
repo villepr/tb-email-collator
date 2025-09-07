@@ -11,6 +11,9 @@ Thunderbird Email Collation ExtensionThis is a Thunderbird WebExtension that all
 │   ├── deduplication.js        # Logic for comparing embeddings and removing duplicates
 │   ├── storage.js              # Manages extension settings
 │   └── utils.js                # Utility classes (ProgressReporter, etc.)
+├── popup/vendor/
+│   ├── tom-select.css          # Vendored library for rich select dropdowns
+│   └── tom-select.complete.js
 ├── icons/
 │   ├── icon-16.png
 │   ├── icon-32.png

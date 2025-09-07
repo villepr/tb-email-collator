@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Constants ---
+    const UI_COMPLETION_DELAY = 5000; // ms to wait before resetting UI or closing window, allowing user to see the final status.
+
     // --- Globals ---
     let tomSelect;
 
@@ -70,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             senderLoader.classList.remove('active');
         }
     }
-    
+
     /**
      * Checks for a 'sender' URL parameter and pre-selects them.
      */
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tomSelect.addItem(sender);
         }
     }
-    
+
 
     /**
      * Handles tab switching between "Collate" and "Settings".
@@ -124,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to load settings:", error);
         }
     }
-    
+
     /**
      * Saves the current settings from the form to storage.
      */
@@ -182,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 outputMethod: document.querySelector('input[name="output-method"]:checked').value,
                 settings: settings.data
             };
-            
+
             messenger.runtime.sendMessage({ action: 'collate', data: collationData });
 
         } catch (error) {
@@ -215,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
              resetUiAfterCompletion(true);
         }
     }
-    
+
     function resetUiAfterCompletion(isSuccess = false) {
         setTimeout(() => {
             startButton.disabled = false;
@@ -225,19 +228,19 @@ document.addEventListener('DOMContentLoaded', () => {
                  progressBarInner.style.width = '0%';
                  progressBarInner.style.backgroundColor = 'var(--primary-color)';
             }
-        }, 5000);
+        }, UI_COMPLETION_DELAY);
     }
-    
+
     /**
      * Handles incoming messages (e.g., progress updates) from the background script.
      */
     function handleMessages(request, sender, sendResponse) {
         if (request.action === 'progress') {
             updateProgress(request.data);
+            // The popup can be closed once the process is complete or has an error.
             if(request.data.type === 'complete' || request.data.type === 'error') {
-                 if (window.location.protocol !== 'moz-extension:') {
-                     window.close();
-                 }
+                 // Automatically close the popup window after a short delay
+                 setTimeout(() => window.close(), UI_COMPLETION_DELAY);
             }
         }
     }

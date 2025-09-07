@@ -54,6 +54,10 @@ messenger.runtime.onStartup.addListener(setupMenus);
 messenger.menus.onClicked.addListener(async (info, tab) => {
     debugLog("Menu clicked:", info);
 
+    // We use messenger.windows.create to open a larger, more persistent popup window
+    // instead of messenger.action.openPopup(), because the UI is complex and benefits
+    // from more space. This is also necessary for launching the window from menu items
+    // that are not the main toolbar action.
     if (info.menuItemId === "collate-emails-tools-menu") {
         messenger.windows.create({
             url: "/popup/collate.html",
@@ -141,7 +145,7 @@ async function handleCollation(data) {
         });
 
         const htmlContent = await collator.collate(data.senders, data.startDate);
-        
+
         if (data.outputMethod === 'tab') {
             await openResultInBrowser(htmlContent);
         } else {
